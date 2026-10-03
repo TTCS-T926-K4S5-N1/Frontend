@@ -1,3 +1,263 @@
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đổi mật khẩu | TTCS CRM Enterprise</title>
+  <meta name="description" content="Form đổi mật khẩu tài khoản người dùng an toàn, bảo vệ dữ liệu khách hàng và phiên đăng nhập.">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared/common.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared/layout.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared/header.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared/sidebar.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/auth/auth.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <div class="app-container">
+    <!-- CRM Sidebar Navigation -->
+    <aside class="crm-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">CRM</div>
+        <div>
+          <div class="brand-text">CRM System</div>
+          <span class="brand-sub">Quản lý bán hàng</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <div class="menu-category">Tổng quan</div>
+        <a class="nav-item" href="${pageContext.request.contextPath}/index.jsp#dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" href="${pageContext.request.contextPath}/leads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Khách hàng & Leads</span>
+        </a>
+
+        <div class="menu-category">Tài khoản & Bảo mật</div>
+        <a class="nav-item active" href="${pageContext.request.contextPath}/auth/change-password">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-1.5 1.5L14 9l-1.5-1.5L11 9l-1.5-1.5L8 9 4.5 5.5a2.121 2.121 0 0 0-3 3L7 14l3.5 3.5 1.5-1.5 1.5 1.5 1.5-1.5 1.5 1.5 5.5-5.5a2.121 2.121 0 0 0 0-3z"/></svg>
+          <span>Đổi mật khẩu</span>
+        </a>
+        <a class="nav-item" href="${pageContext.request.contextPath}/users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Quản lý người dùng</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>Phiên bản CRM v3.4.0</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      <!-- Topbar Header -->
+      <header class="crm-topbar">
+        <div class="topbar-left">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <span>Hệ thống</span>
+            <span>/</span>
+            <span>Thiết lập tài khoản</span>
+            <span>/</span>
+            <span class="current">Đổi mật khẩu</span>
+          </nav>
+        </div>
+
+        <div class="topbar-right">
+          <div class="user-profile">
+            <div class="user-avatar">AD</div>
+            <div class="user-info">
+              <span class="user-name">Quản trị viên</span>
+              <span class="user-role-label">admin@ttcs-crm.vn</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Page Content -->
+      <main class="page-content">
+        <div class="auth-page-wrapper">
+          <div class="auth-card">
+            
+            <div class="auth-card-header">
+              <div class="security-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                Bảo mật tài khoản & danh mục khách hàng
+              </div>
+              <h1 class="auth-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+                Đổi mật khẩu
+              </h1>
+              <p class="auth-card-desc">
+                Đổi mật khẩu định kỳ giúp bảo vệ tài khoản, ngăn chặn truy cập trái phép và bảo mật toàn diện dữ liệu giao dịch khách hàng.
+              </p>
+            </div>
+
+            <!-- Dynamic Alert Container -->
+            <div id="formAlertContainer"></div>
+
+            <!-- Change Password Form -->
+            <form id="changePasswordForm" action="${pageContext.request.contextPath}/api/auth/change-password" method="POST" novalidate autocomplete="off">
+              
+              <!-- Trường 1: Mật khẩu hiện tại -->
+              <div class="form-group">
+                <label class="form-label" for="currentPassword">
+                  Mật khẩu hiện tại <span class="required">*</span>
+                </label>
+                <div class="password-input-wrapper">
+                  <span class="input-icon-left">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </span>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    class="form-control has-icon-left has-icon-right"
+                    placeholder="Nhập mật khẩu bạn đang dùng"
+                    required
+                  >
+                  <button type="button" class="toggle-password-btn" id="toggleCurrentPwdBtn" aria-label="Hiện mật khẩu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <div class="form-error" id="currentPasswordError" style="display: none;"></div>
+              </div>
+
+              <!-- Trường 2: Mật khẩu mới -->
+              <div class="form-group">
+                <label class="form-label" for="newPassword">
+                  Mật khẩu mới <span class="required">*</span>
+                </label>
+                <div class="password-input-wrapper">
+                  <span class="input-icon-left">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+                  </span>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    class="form-control has-icon-left has-icon-right"
+                    placeholder="Tối thiểu 8 ký tự, gồm cả chữ cái và số"
+                    required
+                  >
+                  <button type="button" class="toggle-password-btn" id="toggleNewPwdBtn" aria-label="Hiện mật khẩu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <div class="form-error" id="newPasswordError" style="display: none;"></div>
+
+                <div class="strength-meter-box" id="strengthMeterBox" style="display: none;">
+                  <div class="strength-meter-header">
+                    <span class="strength-meter-label">Độ mạnh mật khẩu:</span>
+                    <span class="strength-meter-status" id="strengthStatus">Chưa nhập</span>
+                  </div>
+                  <div class="strength-bar-track">
+                    <div class="strength-bar-fill" id="strengthBarFill"></div>
+                  </div>
+                  <div class="criteria-list">
+                    <div class="criteria-item" id="critMinLength">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      <span>Tối thiểu 8 ký tự</span>
+                    </div>
+                    <div class="criteria-item" id="critHasLetter">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      <span>Có ít nhất 1 chữ cái</span>
+                    </div>
+                    <div class="criteria-item" id="critHasNumber">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      <span>Có ít nhất 1 chữ số</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trường 3: Xác nhận mật khẩu mới -->
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword">
+                  Xác nhận mật khẩu mới <span class="required">*</span>
+                </label>
+                <div class="password-input-wrapper">
+                  <span class="input-icon-left">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </span>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    class="form-control has-icon-left has-icon-right"
+                    placeholder="Nhập lại mật khẩu mới để xác nhận"
+                    required
+                  >
+                  <button type="button" class="toggle-password-btn" id="toggleConfirmPwdBtn" aria-label="Hiện mật khẩu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <div class="form-error" id="confirmPasswordError" style="display: none;"></div>
+                <div class="match-success" id="confirmPasswordSuccess" style="display: none;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Mật khẩu xác nhận trùng khớp</span>
+                </div>
+              </div>
+
+              <!-- Trường 4: Checkbox thu hồi các phiên đăng nhập khác -->
+              <div class="revoke-card">
+                <label class="revoke-label-wrapper">
+                  <input
+                    type="checkbox"
+                    id="revokeOtherSessions"
+                    name="revokeOtherSessions"
+                    class="revoke-checkbox"
+                    checked
+                  >
+                  <div class="revoke-content">
+                    <div class="revoke-title-row">
+                      <span class="revoke-title">Thu hồi và đăng xuất khỏi tất cả các thiết bị khác</span>
+                      <span class="badge-recommended">Khuyên dùng</span>
+                    </div>
+                    <p class="revoke-desc">
+                      Tất cả phiên đăng nhập khác trên trình duyệt web, máy tính công ty hoặc điện thoại sẽ tự động bị chấm dứt để bảo vệ tài khoản khỏi truy cập trái phép.
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Form Action Buttons -->
+              <div class="form-actions-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">
+                  Hủy bỏ
+                </button>
+                <button type="button" class="btn btn-ghost" id="resetBtn">
+                  Làm lại
+                </button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  <span>Xác nhận đổi mật khẩu</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="${pageContext.request.contextPath}/js/auth/change-password.js"></script>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
